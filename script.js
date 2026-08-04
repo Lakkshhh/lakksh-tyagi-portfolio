@@ -166,28 +166,34 @@ function renderProjects() {
 
 function modalMotion(trigger, direction = "open") {
   modalPanel.getAnimations().forEach((animation) => animation.cancel());
-  const duration = direction === "open" ? 680 : 520;
+  const duration = direction === "open" ? 920 : 760;
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
   const panelRect = modalPanel.getBoundingClientRect();
   const triggerRect = trigger.getBoundingClientRect();
   const triggerCenterX = triggerRect.left + triggerRect.width / 2;
   const triggerCenterY = triggerRect.top + triggerRect.height / 2;
   const panelCenterX = panelRect.left + panelRect.width / 2;
   const panelCenterY = panelRect.top + panelRect.height / 2;
-  const originX = ((triggerCenterX - panelRect.left) / panelRect.width) * 100;
-  const originY = ((triggerCenterY - panelRect.top) / panelRect.height) * 100;
+  const originX = clamp(((triggerCenterX - panelRect.left) / panelRect.width) * 100, 8, 92);
+  const originY = clamp(((triggerCenterY - panelRect.top) / panelRect.height) * 100, 8, 92);
 
   modalPanel.style.setProperty("--modal-origin-x", `${originX}%`);
   modalPanel.style.setProperty("--modal-origin-y", `${originY}%`);
 
   const collapsed = {
     opacity: 0,
-    transform: `translate(${triggerCenterX - panelCenterX}px, ${triggerCenterY - panelCenterY}px) scaleX(0.18) scaleY(0.045)`,
-    clipPath: "inset(45% 12% 45% 12% round 999px)",
+    transform: `translate(${triggerCenterX - panelCenterX}px, ${triggerCenterY - panelCenterY}px) scaleX(0.12) scaleY(0.035)`,
+    clipPath: "inset(48% 22% 48% 22% round 999px)",
   };
-  const mid = {
+  const unfurl = {
+    opacity: 0.72,
+    transform: `translate(${(triggerCenterX - panelCenterX) * 0.5}px, ${(triggerCenterY - panelCenterY) * 0.42}px) scaleX(0.34) scaleY(0.92)`,
+    clipPath: "inset(28% 10% 28% 10% round 28px)",
+  };
+  const settle = {
     opacity: 1,
-    transform: `translate(${(triggerCenterX - panelCenterX) * 0.22}px, ${(triggerCenterY - panelCenterY) * 0.18}px) scaleX(0.72) scaleY(1.08)`,
-    clipPath: "inset(8% 2% 8% 2% round 18px)",
+    transform: `translate(${(triggerCenterX - panelCenterX) * 0.1}px, ${(triggerCenterY - panelCenterY) * 0.08}px) scaleX(0.92) scaleY(1.02)`,
+    clipPath: "inset(3% 1.5% 3% 1.5% round 12px)",
   };
   const expanded = {
     opacity: 1,
@@ -195,10 +201,10 @@ function modalMotion(trigger, direction = "open") {
     clipPath: "inset(0 0 0 0 round 10px)",
   };
 
-  const keyframes = direction === "open" ? [collapsed, mid, expanded] : [expanded, mid, collapsed];
+  const keyframes = direction === "open" ? [collapsed, unfurl, settle, expanded] : [expanded, settle, unfurl, collapsed];
   const animation = modalPanel.animate(keyframes, {
     duration,
-    easing: "cubic-bezier(0.2, 0.78, 0.18, 1)",
+    easing: direction === "open" ? "cubic-bezier(0.19, 1, 0.22, 1)" : "cubic-bezier(0.76, 0, 0.24, 1)",
     fill: "forwards",
   });
 
