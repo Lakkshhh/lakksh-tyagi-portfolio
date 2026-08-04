@@ -1,5 +1,5 @@
-# Lakksh Portfolio
+# Lakksh's Portfolio
 
-A personal portfolio website for Lakksh Tyagi.
+My very own custom portfolio website!
 
 Live site: https://lakkshhh.github.io/lakksh-portfolio/
