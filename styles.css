@@ -891,12 +891,27 @@ h3 {
     min-height: 100svh;
   }
 
+  .hero-inner {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .contact-section {
     min-height: 100svh;
   }
 
   .carousel-shell {
-    grid-template-columns: 42px minmax(0, 1fr) 42px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+  }
+
+  .project-copy {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .project-card.is-left,
@@ -969,7 +984,13 @@ h3 {
   }
 
   .hero-section h1 {
-    font-size: clamp(64px, 21vw, 98px);
+    font-size: clamp(58px, 19vw, 86px);
+  }
+
+  .hero-section h1,
+  .role {
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
 
   .role,
@@ -982,17 +1003,23 @@ h3 {
   }
 
   .project-card {
-    width: min(100%, 310px);
+    width: min(100%, 290px);
     height: 220px;
     padding: 21px;
   }
 
   .project-copy h2 {
-    font-size: clamp(42px, 16vw, 64px);
+    max-width: 100%;
+    font-size: clamp(38px, 13.8vw, 56px);
+    overflow-wrap: break-word;
+  }
+
+  .project-copy p:not(.eyebrow) {
+    max-width: 100%;
   }
 
   .arrow {
-    width: 36px;
+    width: 32px;
     height: 36px;
   }
 
