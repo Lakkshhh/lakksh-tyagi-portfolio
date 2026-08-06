@@ -23,6 +23,8 @@ const projects = [
     description:
       "Built an LLM-powered financial analytics bot and automated Excel data pipelines. Boosted client profit margins by 10% and improved financial decision-making speed by 20%.",
     image: "./assets/experience/experience-02.png",
+    imageFit: "contain",
+    imageBackground: "#ffffff",
     bullets: [
       "Built an LLM-powered financial analytics bot for spend analysis and visual reporting.",
       "Integrated Mistral 7B and the Gemini API into the analytics workflow.",
@@ -139,6 +141,8 @@ function renderProjects() {
     card.type = "button";
     card.className = `project-card ${cardClass(index)}`;
     card.style.setProperty("--card-art", project.art);
+    card.style.setProperty("--card-image-fit", project.imageFit || "cover");
+    card.style.setProperty("--card-image-bg", project.imageBackground || "transparent");
     card.setAttribute("aria-label", `Show ${project.title} experience`);
     card.innerHTML = `<img src="${project.image}" alt="" />`;
     card.addEventListener("click", () => {
