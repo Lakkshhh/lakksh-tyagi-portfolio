@@ -518,15 +518,40 @@ h3 {
   line-height: 0.96;
 }
 
-.experience-modal__panel ul {
+.experience-modal__body {
   display: grid;
-  gap: 18px;
+  gap: 22px;
   margin: 32px 0 0;
+}
+
+.modal-case-study {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.modal-case-study .eyebrow {
+  margin-bottom: 8px;
+  font-size: clamp(12px, 1.2vw, 14px);
+}
+
+.modal-case-study p {
+  margin: 0 0 12px;
+}
+
+.modal-case-study p:last-child {
+  margin: 0;
+}
+
+.modal-results {
+  display: grid;
+  gap: 12px;
+  margin: 10px 0 0;
   padding: 0;
   list-style: none;
 }
 
-.experience-modal__panel li {
+.modal-results li {
   position: relative;
   padding-left: 24px;
   color: var(--muted);
@@ -534,7 +559,7 @@ h3 {
   line-height: 1.8;
 }
 
-.experience-modal__panel li::before {
+.modal-results li::before {
   position: absolute;
   top: 0.82em;
   left: 0;
@@ -1061,7 +1086,8 @@ h3 {
     hyphens: manual;
   }
 
-  .experience-modal__panel li {
+  .modal-case-study,
+  .modal-results li {
     overflow-wrap: normal;
     word-break: normal;
     hyphens: manual;
