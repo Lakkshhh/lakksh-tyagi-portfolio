@@ -8,16 +8,18 @@ const projects = [
     image: "./assets/experience/experience-01.png",
     caseStudy: {
       goal:
-        "SMILE Lab: Build and rigorously evaluate AI models that predict human emotional response from images.\n\nTEA Lab: Diagnose and fix a training failure silently degrading a multimodal autonomous-driving world model.",
+        "SMILE Lab: Build and rigorously evaluate computer-vision models for predicting human emotional responses from images.\n\nTEA Lab: Diagnose and improve training stability in a multimodal autonomous-driving world model.",
       context:
-        "SMILE Lab: I benchmarked 10 CNN and Vision Transformer architectures on a 118K-image dataset across 8 emotion categories, then discovered my initial evaluation setup wasn't reflecting real-world performance — results looked strong until tested on more diverse data. I redesigned the evaluation methodology, then extended the work into a zero-shot comparison of frontier LLMs for continuous emotion prediction.\n\nTEA Lab: I inherited an existing MUVO training pipeline (RGB + LiDAR world model, ResNet18 encoder) and, after setting up TensorBoard monitoring for the first time, identified a posterior collapse around epoch 11 — the KL divergence was dropping to zero, meaning the model had stopped meaningfully using its latent space. I resolved it through regularization and learning-rate tuning, then added a self-attention layer at the encoder-decoder bottleneck and UNet-style skip connections to further improve reconstruction fidelity.",
+        "SMILE Lab: I built a PyTorch training and benchmarking workflow on UF's HiPerGator cluster to evaluate 10 CNN and Vision Transformer architectures across 118K+ images and 8 emotion categories. I compared architectures under a consistent experimental setup before fine-tuning stronger candidates, improving classification F1 from 0.72 to 0.88 while reducing GPU runtime by 30%. I then extended the work from discrete emotion classification to continuous valence and arousal prediction using a custom CLIP-ViT regression head. Finally, I built a multimodal API evaluation pipeline comparing GPT, Claude, and Gemini using zero-shot prompting against the same ground-truth emotion ratings.\n\nTEA Lab: I inherited an existing MUVO training pipeline using RGB and LiDAR data with a ResNet18 encoder and first focused on getting the system running reliably on UF's HiPerGator cluster. I configured TensorBoard monitoring through an SSH tunnel and analyzed training curves to diagnose a posterior-collapse failure around epochs 11–12, where KL divergence approached zero while reconstruction behavior deteriorated. I addressed the collapse through controlled regularization and learning-rate tuning, then experimented with self-attention at the decoder bottleneck and U-Net-style skip connections to improve spatial information flow and reconstruction fidelity.",
       results: [
-        "Improved classification F1 score from 0.72 to 0.88 while cutting GPU runtime 30% through parallelized training",
-        "Benchmarked GPT, Claude, and Gemini zero-shot for valence-arousal prediction — Claude led, reaching 95% alignment with human ratings",
-        "The evaluation redesign was arguably the more important contribution: it made every downstream result trustworthy",
-        "Reduced RGB reconstruction loss by 42%",
-        "Reduced LiDAR reconstruction loss by 50%",
-        "KL divergence stabilized at 0.17–0.18 and never collapsed across a full 100-epoch run — the key success marker compared to every previous attempt",
+        "Improved emotion-classification F1 from 0.72 to 0.88 through fine-tuning",
+        "Reduced HiPerGator GPU runtime by 30% through training-workflow optimization",
+        "Benchmarked GPT, Claude, and Gemini for zero-shot valence/arousal prediction, with Claude reaching 95% ground-truth alignment",
+        "Redesigned evaluation methodology to improve confidence in model generalization and downstream comparisons",
+        "Reduced RGB reconstruction loss by approximately 42% after decoder architecture improvements",
+        "Reduced LiDAR reconstruction loss by approximately 50%",
+        "Stabilized KL divergence around 0.17–0.18 across a subsequent 100-epoch run without recurrence of collapse",
+        "Improved training observability and failure diagnosis through TensorBoard-based monitoring",
       ],
     },
     art:
@@ -33,13 +35,14 @@ const projects = [
     imageFit: "contain",
     imageBackground: "#ffffff",
     caseStudy: {
-      goal: "Automate manual financial spend analysis for clients whose data was too sensitive for ungoverned cloud tools.",
+      goal: "Automate manual financial spend analysis while keeping sensitive client data and financial computation under local control.",
       context:
-        "I owned this pipeline solo, end-to-end. Raw financial data stayed entirely local in SQLite, processed with Pandas and SQLAlchemy — only aggregated, category-level summaries ever reached Gemini 2.5 Pro, which was used strictly for interpretation, never computation. After an early version that let the LLM handle both computation and interpretation produced subtle arithmetic inconsistencies, I redesigned the system so the deterministic pipeline was the sole source of truth.",
+        "I owned the analytics pipeline end-to-end, replacing manual Excel-based analysis with an automated system operating against local SQLite financial databases. I used pandas for financial calculations and transformations, SQLAlchemy for database access, and openpyxl for Excel ingestion and reporting. An early version allowed the LLM to perform both computation and interpretation, which exposed subtle arithmetic inconsistencies. I redesigned the architecture so the deterministic Python pipeline became the sole source of truth: raw and vendor-level financial data remained local, while only pre-computed category- and cost-center-level summaries were passed to Gemini 2.5 Pro for executive interpretation. I also generated independent Matplotlib visualizations and integrated the results into a Streamlit dashboard, with explicit failure handling ensuring an LLM/API failure could never modify the underlying financial calculations.",
       results: [
-        "Cut month-end close cycle time by approximately 20%",
-        "Zero raw or vendor-level data ever left the local environment",
-        "Built explicit failure handling so a Gemini API outage could never corrupt the underlying financial numbers",
+        "Reduced month-end close cycle time by approximately 20% against the existing operational baseline",
+        "Validated the deterministic financial engine across 7 mathematical edge-case categories",
+        "Kept zero raw or vendor-level financial data outside the local processing environment",
+        "Built independent financial calculations and visualizations so LLM outputs could not alter numerical results",
       ],
     },
     art:
@@ -53,13 +56,14 @@ const projects = [
       "Built Java/Spring Boot microservices for e-commerce product, cart, auth, and Cloudinary flows. Improved platform responsiveness by 20% and reduced unauthorized access by 25%.",
     image: "./assets/experience/experience-03.png",
     caseStudy: {
-      goal: "Break a tightly coupled e-commerce backend into secure, maintainable services without slowing feature delivery.",
+      goal: "Transform a tightly coupled e-commerce backend into a more modular, secure, and maintainable service architecture.",
       context:
-        "As a backend intern, I redesigned core platform functionality into 10+ modular REST capabilities in Java and Spring Boot — product management, cart, authentication, user profiles, and inventory — while restructuring the underlying PostgreSQL schema and implementing consistent JWT-based authentication across every protected endpoint.",
+        "As a backend intern, I helped restructure an e-commerce platform being developed for eventual deployment by implementing 10+ Spring Boot microservices across product, categorization, search, cart, authentication, user, inventory, email, and media workflows. I implemented JWT-based authentication across protected API endpoints and restructured the underlying database schema to reduce redundancy and improve CRUD performance. I also worked on inter-service communication, adding better error handling and timeouts to prevent failures in one service from unnecessarily propagating across the system. Core REST workflows were validated through Postman within an Agile/Scrum development process using Jira, Confluence, Miro, and code reviews.",
       results: [
-        "20% improvement in API responsiveness after schema restructuring and CRUD optimization",
-        "25% reduction in unauthorized access incidents after JWT rollout",
-        "Built an atomic stock-update mechanism preventing overselling when multiple purchases hit the same item concurrently",
+        "Improved API responsiveness by approximately 20% through database restructuring and CRUD optimization",
+        "Reduced unauthorized access incidents by approximately 25% after implementing JWT-based authentication",
+        "Built and integrated 10+ modular Spring Boot services covering core e-commerce workflows",
+        "Improved service resilience through explicit downstream error handling and timeout behavior",
       ],
     },
     art:
@@ -73,13 +77,14 @@ const projects = [
       "Launched an AI-powered HR chatbot with local and production LLM integrations. Automated 80% of HR processes and cut response time by 30%.",
     image: "./assets/experience/experience-04.png",
     caseStudy: {
-      goal: "Automate HR's most repetitive employee queries without sacrificing accuracy on sensitive policy questions.",
+      goal: "Automate routine HR queries while ensuring sensitive policy answers remained grounded in verified company documentation.",
       context:
-        "I joined Husqvarna's AI Lab (Sweden team) at a time when LLMs were still new technology, and my first task was researching transformer architecture and presenting feasibility findings directly to AI Lab leadership and senior company stakeholders. That presentation led to my internship being extended to build one of the proposed use cases — a retrieval-grounded HR assistant using LangChain, Pinecone, and OpenAI, with every response grounded in verified internal HR documents rather than the model's own judgment.",
+        "I joined Husqvarna's AI Lab when LLMs were still emerging technology. My initial work involved researching Transformer architectures and LLM capabilities and presenting feasibility findings to AI Lab leadership and senior stakeholders. After the research phase, I helped build the proposed HR assistant using LangChain, OpenAI, and Pinecone, with retrieval grounding responses in verified internal HR documents rather than relying solely on the model's own knowledge. I deployed the retrieval pipeline through Databricks and Gradio and implemented confidence-threshold guardrails so the assistant could decline unsupported questions rather than hallucinate policy information.",
       results: [
         "Automated 15%+ of routine, document-answerable HR queries",
-        "Gave 500+ employees self-service access to HR policy information",
-        "Confidence-threshold guardrails ensured the assistant declined to answer rather than guess when it lacked a grounded match",
+        "Enabled 500+ employees to self-serve routine HR policy information",
+        "Implemented retrieval-confidence guardrails that restricted responses to sufficiently grounded HR documentation",
+        "Demonstrated an end-to-end path from AI feasibility research through retrieval architecture, guardrails, and internal deployment",
       ],
     },
     art:
@@ -93,13 +98,14 @@ const projects = [
       "Architected a 4-agent LangGraph pipeline with FastAPI and Next.js for personalized debt repayment plans. Delivered real-time amortization simulations under 200ms with 100% mathematical accuracy.",
     image: "./assets/experience/experience-05.png",
     caseStudy: {
-      goal: "Help people juggling multiple loans clearly compare repayment strategies and see the real financial impact of each choice.",
+      goal: "Help users compare loan repayment strategies and understand the financial impact of different payment plans.",
       context:
-        "I designed a 4-agent LangGraph pipeline modeling avalanche, snowball, and standard repayment strategies with clearly separated agent responsibilities, built on a FastAPI backend and Next.js frontend with Supabase. All financial computation lives in deterministic Python logic — the LLM is used solely to interpret results and communicate recommendations in plain language.",
+        "I designed a 4-agent LangGraph pipeline separating user interaction, repayment strategy analysis, simulation, and recommendation responsibilities. The system modeled avalanche, snowball, and standard repayment strategies through a FastAPI backend and Next.js/TypeScript frontend. Because financial calculations are high-stakes, all amortization and repayment calculations were handled by deterministic Python logic using precise decimal arithmetic; the LLM was restricted to interpreting validated results and communicating recommendations.",
       results: [
-        "Modeled three distinct repayment strategies with Decimal-accurate amortization logic",
-        "All financial math kept fully deterministic, with the LLM never touching a calculation",
-        "Real-time amortization simulations delivered in under 200ms, powered by FastAPI's async request handling",
+        "Modeled 3 repayment strategies with deterministic amortization and repayment logic",
+        "Validated the financial engine across 7 mathematical edge-case categories",
+        "Isolated LLM reasoning from financial computation to prevent model-generated arithmetic from affecting results",
+        "Delivered real-time amortization simulations in under 200ms through FastAPI",
       ],
     },
     art:
@@ -113,13 +119,14 @@ const projects = [
       "Created and deployed a full-stack housing platform with Go, React, Vercel, and Render. Served 100+ users through 20+ REST APIs with authentication, filtering, and concurrent request support.",
     image: "./assets/experience/experience-06.png",
     caseStudy: {
-      goal: "Help students in a local off-campus housing market more easily find relevant housing and navigate their search.",
+      goal: "Help students find relevant off-campus housing through better local search and filtering.",
       context:
-        "I built and deployed a full-stack housing platform in Go and React, hosted on Vercel and Render, with a MongoDB backend and 20+ unit-tested REST APIs supporting authentication, filtering, and concurrent requests. Early on, I made a real product mistake — I built a roommate-matching system based on my own assumption that users would want it, without validating the need first. After talking to actual users, I learned their real priority was better search and filtering, not matching. I reprioritized around that, focused engineering effort on core search functionality, and improved overall performance and usability.",
+        "I built and deployed a full-stack housing platform using Go, React, MongoDB, Vercel, and Render, with 20+ REST APIs supporting authentication, filtering, and concurrent requests. Early in development, I made a product mistake by building a roommate-matching feature based on an assumption rather than validated demand. After speaking with users, I found that search and filtering were the higher-priority problems, so I reprioritized development toward those workflows and improved the core housing-discovery experience.",
       results: [
-        "Served 100+ users, validating the reprioritized core idea",
+        "Served 100+ users, validating the reprioritized product direction",
         "Built 20+ unit-tested REST APIs supporting authentication, filtering, and concurrent access",
-        "The bigger lesson: validating user needs before building is as important as the engineering itself — a mistake I caught early enough to correct before it cost the whole product",
+        "Shifted engineering effort from an unvalidated matching feature toward user-validated search functionality",
+        "Demonstrated the importance of validating product requirements before committing engineering resources",
       ],
     },
     art:

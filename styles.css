@@ -532,6 +532,7 @@ h3 {
 
 .modal-case-study .eyebrow {
   margin-bottom: 8px;
+  color: var(--paper);
   font-size: clamp(12px, 1.2vw, 14px);
 }
 
