@@ -1,25 +1,22 @@
 const projects = [
   {
     type: "experience",
-    tag: "SMILE Lab + TEA Lab",
-    title: "Graduate Research Assistant",
+    tag: "Canva",
+    title: "Software Engineer (AI/ML)",
     description:
-      "Built and evaluated AI systems across image-based emotion prediction and multimodal autonomous-driving research. Improved SMILE Lab model reliability and stabilized TEA Lab world-model training after diagnosing a silent collapse in the pipeline.",
-    image: "./assets/experience/experience-01.png",
+      "Building agentic AI workflows, RAG systems, LLM evaluation suites, and Go microservices for a global design platform.",
+    image: "./assets/experience/canva-logo.png",
     caseStudy: {
       goal:
-        "SMILE Lab: Build and rigorously evaluate computer-vision models for predicting human emotional responses from images.\n\nTEA Lab: Diagnose and improve training stability in a multimodal autonomous-driving world model.",
+        "Build production-ready AI systems that help large language models complete useful design workflows while keeping outputs grounded, measurable, and safe to release.",
       context:
-        "SMILE Lab: I built a PyTorch training and benchmarking workflow on UF's HiPerGator cluster to evaluate 10 CNN and Vision Transformer architectures across 118K+ images and 8 emotion categories. I compared architectures under a consistent experimental setup before fine-tuning stronger candidates, improving classification F1 from 0.72 to 0.88 while reducing GPU runtime by 30%. I then extended the work from discrete emotion classification to continuous valence and arousal prediction using a custom CLIP-ViT regression head. Finally, I built a multimodal API evaluation pipeline comparing GPT, Claude, and Gemini using zero-shot prompting against the same ground-truth emotion ratings.\n\nTEA Lab: I inherited an existing MUVO training pipeline using RGB and LiDAR data with a ResNet18 encoder and first focused on getting the system running reliably on UF's HiPerGator cluster. I configured TensorBoard monitoring through an SSH tunnel and analyzed training curves to diagnose a posterior-collapse failure around epochs 11–12, where KL divergence approached zero while reconstruction behavior deteriorated. I addressed the collapse through controlled regularization and learning-rate tuning, then experimented with self-attention at the decoder bottleneck and U-Net-style skip connections to improve spatial information flow and reconstruction fidelity.",
+        "At Canva, I develop agentic AI workflows with Python, LangGraph, and Model Context Protocol so LLMs can complete multi-step template search and brand kit tasks for beta users. I also work on Go microservices for storing, versioning, and sharing design assets on AWS EKS, exposing functionality through gRPC and REST APIs consumed by editor and collaboration product teams. On the AI quality side, I build RAG systems over help center content using Amazon Bedrock embeddings, pgvector, and BM25, then back releases with Python and pytest evaluation suites covering groundedness, safety, guardrails, and prompt versioning.",
       results: [
-        "Improved emotion-classification F1 from 0.72 to 0.88 through fine-tuning",
-        "Reduced HiPerGator GPU runtime by 30% through training-workflow optimization",
-        "Benchmarked GPT, Claude, and Gemini for zero-shot valence/arousal prediction, with Claude reaching 95% ground-truth alignment",
-        "Redesigned evaluation methodology to improve confidence in model generalization and downstream comparisons",
-        "Reduced RGB reconstruction loss by approximately 42% after decoder architecture improvements",
-        "Reduced LiDAR reconstruction loss by approximately 50%",
-        "Stabilized KL divergence around 0.17–0.18 across a subsequent 100-epoch run without recurrence of collapse",
-        "Improved training observability and failure diagnosis through TensorBoard-based monitoring",
+        "Developed LangGraph and MCP workflows for multi-step template search and brand kit tasks",
+        "Built Go microservices on AWS EKS with gRPC and REST APIs for internal editor and collaboration teams",
+        "Kept collaborator views consistent within 2 seconds through Kafka and DynamoDB Streams propagation",
+        "Raised top-five hybrid search recall by 18% with a RAG layer combining Bedrock embeddings, pgvector, and BM25",
+        "Built LLM evaluation suites over 500+ curated prompts so groundedness and safety regressions block merges before release",
       ],
     },
     art:
@@ -27,68 +24,25 @@ const projects = [
   },
   {
     type: "experience",
-    tag: "CraftySogo",
-    title: "Software Engineer Intern",
+    tag: "Meesho",
+    title: "Software Engineer",
     description:
-      "Built an LLM-powered financial analytics bot and automated Excel data pipelines. Boosted client profit margins by 10% and improved financial decision-making speed by 20%.",
-    image: "./assets/experience/experience-02.png",
-    imageFit: "contain",
-    imageBackground: "#ffffff",
+      "Built Python and Java marketplace services for catalog, checkout, payouts, search, testing, and ML-assisted shipment routing.",
+    image: "./assets/experience/meesho-logo.png",
     caseStudy: {
-      goal: "Automate manual financial spend analysis while keeping sensitive client data and financial computation under local control.",
+      goal: "Improve core marketplace reliability and speed across catalog listing, checkout, seller payouts, and shipment workflows.",
       context:
-        "I owned the analytics pipeline end-to-end, replacing manual Excel-based analysis with an automated system operating against local SQLite financial databases. I used pandas for financial calculations and transformations, SQLAlchemy for database access, and openpyxl for Excel ingestion and reporting. An early version allowed the LLM to perform both computation and interpretation, which exposed subtle arithmetic inconsistencies. I redesigned the architecture so the deterministic Python pipeline became the sole source of truth: raw and vendor-level financial data remained local, while only pre-computed category- and cost-center-level summaries were passed to Gemini 2.5 Pro for executive interpretation. I also generated independent Matplotlib visualizations and integrated the results into a Streamlit dashboard, with explicit failure handling ensuring an LLM/API failure could never modify the underlying financial calculations.",
+        "At Meesho, I worked in a marketplace squad building backend systems for first-time shoppers in tier 2 cities. I delivered catalog listing and checkout features in Python microservices using FastAPI and Django, then helped refactor seller payout reconciliation from a nightly batch job into Java Spring Boot consumers on Apache Kafka. I also improved checkout and search performance by fixing slow MySQL queries with composite indexes, Redis caching, and Elasticsearch mapping changes, while strengthening cart and payout APIs through PyTest, JUnit, and contract testing. Later, I integrated XGBoost return-to-origin risk scores into shipment routing and piloted a Python LLM catalog attribute extractor.",
       results: [
-        "Reduced month-end close cycle time by approximately 20% against the existing operational baseline",
-        "Validated the deterministic financial engine across 7 mathematical edge-case categories",
-        "Kept zero raw or vendor-level financial data outside the local processing environment",
-        "Built independent financial calculations and visualizations so LLM outputs could not alter numerical results",
+        "Cut manual seller payout reconciliation tickets by 40% with Kafka consumers, idempotent retries, and dead letter queues",
+        "Improved p95 checkout and search API latency by 35% after festive-sale load testing",
+        "Raised regression coverage to 80% across two team codebases with PyTest, JUnit, and contract tests",
+        "Deployed Dockerized services to GKE with Helm, Jenkins CI/CD, Prometheus alerts, and Grafana dashboards",
+        "Integrated XGBoost shipment-routing scores and piloted an LLM catalog attribute extractor with 85% reviewer acceptance",
       ],
     },
     art:
       "linear-gradient(180deg, rgba(255,255,255,.12), transparent 28%), repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 2px, transparent 2px 24px), linear-gradient(120deg, #33343a, #1c1d22)",
-  },
-  {
-    type: "experience",
-    tag: "Westernacher Consulting",
-    title: "Software Engineer Intern",
-    description:
-      "Built Java/Spring Boot microservices for e-commerce product, cart, auth, and Cloudinary flows. Improved platform responsiveness by 20% and reduced unauthorized access by 25%.",
-    image: "./assets/experience/experience-03.png",
-    caseStudy: {
-      goal: "Transform a tightly coupled e-commerce backend into a more modular, secure, and maintainable service architecture.",
-      context:
-        "As a backend intern, I helped restructure an e-commerce platform being developed for eventual deployment by implementing 10+ Spring Boot microservices across product, categorization, search, cart, authentication, user, inventory, email, and media workflows. I implemented JWT-based authentication across protected API endpoints and restructured the underlying database schema to reduce redundancy and improve CRUD performance. I also worked on inter-service communication, adding better error handling and timeouts to prevent failures in one service from unnecessarily propagating across the system. Core REST workflows were validated through Postman within an Agile/Scrum development process using Jira, Confluence, Miro, and code reviews.",
-      results: [
-        "Improved API responsiveness by approximately 20% through database restructuring and CRUD optimization",
-        "Reduced unauthorized access incidents by approximately 25% after implementing JWT-based authentication",
-        "Built and integrated 10+ modular Spring Boot services covering core e-commerce workflows",
-        "Improved service resilience through explicit downstream error handling and timeout behavior",
-      ],
-    },
-    art:
-      "radial-gradient(circle at 22% 26%, rgba(255,255,255,.24), transparent 18%), repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 1px, transparent 1px 68px), linear-gradient(140deg, #393a3f, #1b1c21 70%)",
-  },
-  {
-    type: "experience",
-    tag: "Husqvarna Group",
-    title: "AI Software Engineer Intern",
-    description:
-      "Launched an AI-powered HR chatbot with local and production LLM integrations. Automated 80% of HR processes and cut response time by 30%.",
-    image: "./assets/experience/experience-04.png",
-    caseStudy: {
-      goal: "Automate routine HR queries while ensuring sensitive policy answers remained grounded in verified company documentation.",
-      context:
-        "I joined Husqvarna's AI Lab when LLMs were still emerging technology. My initial work involved researching Transformer architectures and LLM capabilities and presenting feasibility findings to AI Lab leadership and senior stakeholders. After the research phase, I helped build the proposed HR assistant using LangChain, OpenAI, and Pinecone, with retrieval grounding responses in verified internal HR documents rather than relying solely on the model's own knowledge. I deployed the retrieval pipeline through Databricks and Gradio and implemented confidence-threshold guardrails so the assistant could decline unsupported questions rather than hallucinate policy information.",
-      results: [
-        "Automated 15%+ of routine, document-answerable HR queries",
-        "Enabled 500+ employees to self-serve routine HR policy information",
-        "Implemented retrieval-confidence guardrails that restricted responses to sufficiently grounded HR documentation",
-        "Demonstrated an end-to-end path from AI feasibility research through retrieval architecture, guardrails, and internal deployment",
-      ],
-    },
-    art:
-      "linear-gradient(135deg, rgba(255,255,255,.11), transparent 35%), repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 1px, transparent 1px 58px), linear-gradient(145deg, #2d2e34, #17181d)",
   },
   {
     type: "project",
